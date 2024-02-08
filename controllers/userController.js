@@ -33,3 +33,8 @@ export const userRegister = async (req, res) => {
         })
     }
 } 
+
+
+export const userLogin = (req, res) => {
+    
+}
