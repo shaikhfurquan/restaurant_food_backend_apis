@@ -1,0 +1,19 @@
+
+USER 
+
+REGISTER USER ==> POST ===>
+curl  -X POST \
+  'http://localhost:6363/api/user/register' \
+  --header 'Accept: */*' \
+  --header 'User-Agent: Thunder Client (https://www.thunderclient.com)' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  "userName" : "sf",
+  "password" : "123456",
+  "email" : "sf@gmail.com",
+  "address" : ["nanded" , "MH"],
+  "phone" : "7769"
+  
+}'
+
+
