@@ -37,6 +37,35 @@ export const userRegister = async (req, res) => {
 }
 
 
-export const userLogin = (req, res) => {
+export const userLogin = async (req, res) => {
+    try {
+        const { email, password } = req.body
+        if (!email || !password) {
+            return res.status(403).json({
+                succcess: false,
+                message: "All fields are required"
+            })
+        }
+        //check if the user registered or not
+        const user = await UserModel.findOne({ email : email, password : password })
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found, Register first",
+            })
+        }
+        res.status(200).json({
+            success: true,
+            message: "Login successful",
+            user: user
 
+        })
+
+    } catch (error) {
+        res.status(404).json({
+            succcess: false,
+            message: "Error while login user",
+            error: error.message
+        })
+    }
 }
