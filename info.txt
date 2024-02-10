@@ -13,7 +13,16 @@ curl  -X POST \
   "email" : "sf@gmail.com",
   "address" : ["nanded" , "MH"],
   "phone" : "7769"
-  
 }'
 
 
+
+curl  -X POST \
+  'http://localhost:6363/api/user/login' \
+  --header 'Accept: */*' \
+  --header 'User-Agent: Thunder Client (https://www.thunderclient.com)' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+  "password" : "123456",
+  "email" : "sf@gmail.com"
+}'
