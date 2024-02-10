@@ -1,5 +1,6 @@
 import UserModel from "../models/userModel.js"
 import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
 
 export const userRegister = async (req, res) => {
     try {
@@ -21,7 +22,6 @@ export const userRegister = async (req, res) => {
         }
         //hashing user password
         const hashPassword = await bcrypt.hash(password, 10)
-        console.log("==>" , hashPassword);
 
         //create new user
         const user = await UserModel.create({ userName, email, password : hashPassword, phone, address })
@@ -51,17 +51,29 @@ export const userLogin = async (req, res) => {
             })
         }
         //check if the user registered or not
-        const user = await UserModel.findOne({ email : email, password : password })
+        const user = await UserModel.findOne({ email : email })
         if (!user) {
             return res.status(404).json({
                 success: false,
                 message: "User not found, Register first",
             })
         }
+        //compare password
+        const isMatch = await bcrypt.compare(password , user.password)
+        if(!isMatch) {
+            return res.status(404).json({success: false, message: "Invalid credentials"})
+        }
+
+        //jwt authentication token
+        const token = jwt.sign({id: user._id} , process.env.JWT_SECRET , {
+            expiresIn : "1d"
+        })
+        user.password = undefined
         res.status(200).json({
             success: true,
             message: "Login successful",
-            user: user
+            token: token,
+            user: user,
 
         })
 
