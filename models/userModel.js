@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "user type is required"],
         default: 'client',
-        emun: ['client', 'admin', 'vendor', 'driver']
+        emun: ['client', 'admin', 'vendor', 'driver'],
     },
     profile: {
         type: String,
