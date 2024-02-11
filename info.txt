@@ -21,6 +21,8 @@ LOGIN USER ==> POST  ==> http://localhost:6363/api/user/login
 
 GET USER ==> GET ==>  http://localhost:6363/api/user/getuser
 
+GET All USERS ==> GET ==>  http://localhost:6363/api/user/all-users
+
 
 UPDATE USER ==> PUT ==> http://localhost:6363/api/user/updateuser
 {

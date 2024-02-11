@@ -110,12 +110,37 @@ export const getAUser = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Error getting users",
+            message: "Error getting user",
             error: error.message
         })
     }
 }
 
+
+export const getAllUsers = async (req, res) => {
+    try {
+        const AllUsers = await UserModel.find()
+        if(!AllUsers){
+            return res.status(404).json({
+                succcess : false,
+                message: "Error getting all users"
+            })
+        }
+
+        res.status(200).json({
+            succcess : true,
+            message : "All users are",
+            AllUsers : AllUsers
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error getting users",
+            error: error.message
+        })
+    }
+}
 
 export const updateUser = async (req, res) => {
     try {
@@ -150,8 +175,6 @@ export const updateUser = async (req, res) => {
         })
     }
 }
-
-
 
 
 export const resetPassword = async (req, res) => {
