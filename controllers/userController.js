@@ -24,7 +24,8 @@ export const userRegister = async (req, res) => {
         const hashPassword = await bcrypt.hash(password, 10)
 
         //create new user
-        const user = await UserModel.create({ userName, email, password : hashPassword, phone, address })
+        const user = await UserModel.create({ ...req.body, password: hashPassword });
+
 
         res.status(201).json({
             success: true,
@@ -32,7 +33,7 @@ export const userRegister = async (req, res) => {
             user: user
         })
     } catch (error) {
-        res.status(404).json({
+        res.status(500).json({
             succcess: false,
             message: "Error while registering user",
             error: error.message
@@ -51,7 +52,7 @@ export const userLogin = async (req, res) => {
             })
         }
         //check if the user registered or not
-        const user = await UserModel.findOne({ email : email })
+        const user = await UserModel.findOne({ email: email })
         if (!user) {
             return res.status(404).json({
                 success: false,
@@ -59,14 +60,14 @@ export const userLogin = async (req, res) => {
             })
         }
         //compare password
-        const isMatch = await bcrypt.compare(password , user.password)
-        if(!isMatch) {
-            return res.status(404).json({success: false, message: "Invalid credentials"})
+        const isMatch = await bcrypt.compare(password, user.password)
+        if (!isMatch) {
+            return res.status(404).json({ success: false, message: "Invalid credentials" })
         }
 
         //jwt authentication token
-        const token = jwt.sign({id: user._id} , process.env.JWT_SECRET , {
-            expiresIn : "1d"
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+            expiresIn: "1d"
         })
         user.password = undefined
         res.status(200).json({
@@ -81,6 +82,83 @@ export const userLogin = async (req, res) => {
         res.status(404).json({
             succcess: false,
             message: "Error while login user",
+            error: error.message
+        })
+    }
+}
+
+
+export const getAUser = async (req, res) => {
+    try {
+        //getting the id from req.body.user
+        const id = req.body.id
+        console.log(id);
+        const user = await UserModel.findById({ _id: id }).select("-password")
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User With this id not found"
+            })
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "user data",
+            user: user
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error getting users",
+            error: error.message
+        })
+    }
+}
+
+
+export const updateUser = async (req, res) => {
+    try {
+        //getting the id from req.body.user
+        const id = req.body.id
+        const user = await UserModel.findOne({ _id: id })
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User With this id not found"
+            })
+        }
+
+        console.log("user" , user);
+        //updating the three values
+        const { userName, address, phone } = req.body
+        if (userName) user.userName = userName
+        if (address) user.address = address
+        if (phone) user.phone = phone
+
+        await user.save()
+        res.status(200).json({
+            success: true,
+            message: 'User saved successfully',
+            user : user
+        })
+    } catch (error) {
+        res.status(500).json({
+            succcess: false,
+            message: "Error while updating user",
+            error: error.message
+        })
+    }
+}
+
+
+export const deleteUser = (req, res) => {
+    try {
+
+    } catch (error) {
+        res.status(500).json({
+            succcess: false,
+            message: "Error while deleting user",
             error: error.message
         })
     }
