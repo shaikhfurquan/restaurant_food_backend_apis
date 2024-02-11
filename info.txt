@@ -38,8 +38,11 @@ PASSWORD RESET  ==> POST ==> http://localhost:6363/api/user/reset-password
 }
 
 
-PASSWORD UPDATE  ==> POST ==>  http://localhost:6363/api/user/update-password
+PASSWORD UPDATE  ==>  POST  ==>  http://localhost:6363/api/user/update-password
 {
   "oldPassword" : "asdf1234",
   "newPassword" : "123456"
 }
+
+
+DELETE USER BY ID ==>  DELETE  ==>  http://localhost:6363/api/user/delete-user/65c91b056748f54875d0cf69

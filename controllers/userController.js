@@ -241,8 +241,20 @@ export const updatePassword = async (req, res) => {
 
 
 
-export const deleteUser = (req, res) => {
+export const deleteUser = async(req, res) => {
     try {
+        const deleteUser = await UserModel.findByIdAndDelete(req.params.id)
+        if(!deleteUser){
+            return res.status(404).json({
+                success: false,
+                message: "User with this Id not found"
+            })
+        }
+
+        res.status(200).json({
+            success: true,
+            message : "User deleted successfully"
+        })
 
     } catch (error) {
         res.status(500).json({
