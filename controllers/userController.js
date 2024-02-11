@@ -4,8 +4,8 @@ import jwt from 'jsonwebtoken'
 
 export const userRegister = async (req, res) => {
     try {
-        const { userName, email, password, phone, address } = req.body
-        if (!userName || !email || !password || !phone || !address) {
+        const { userName, email, password, phone, address , answer} = req.body
+        if (!userName || !email || !password || !phone || !address || !answer) {
             return res.status(500).json({
                 success: false,
                 message: "All fields are required"
@@ -150,6 +150,95 @@ export const updateUser = async (req, res) => {
         })
     }
 }
+
+
+
+
+export const resetPassword = async (req, res) => {
+    try {
+        // finding user on the basis of email
+        const {email, newPassword , answer} = req.body
+        if(!email || !newPassword || !answer) {
+            return res.status(500).json({
+                succcess: false,
+                message: "Please provide all fields"
+            })
+        }
+
+        const user = await UserModel.findOne({email, answer})
+        if(!user){
+            return res.status(500).json({
+                succcess: false,
+                message : "User not found, Invalid answer"
+            })
+        }
+
+        //hashing the newPassword
+        const hashPassword = await bcrypt.hash(newPassword , 10)
+        user.password = hashPassword
+        await user.save()
+
+        res.status(200).json({
+            success : true,
+            message : "Password reset successfully"
+        })
+    } catch (error) {
+        res.status(500).json({
+            succcess: false,
+            message: "Error while updating user password",
+            error: error.message
+        })
+    }
+}
+
+
+export const updatePassword = async (req, res) => {
+    try {
+        //finding user on the basis of id
+        const user = await UserModel.findById({_id : req.body.id})
+        if(!user){
+            return res.status(404).json({
+                success: false,
+                message: "User not found with this id"
+            })
+        }
+
+        //getting the data from the req.body
+        const {oldPassword, newPassword} = req.body
+        if(!oldPassword || !newPassword){
+            return res.status(404).json({
+                success: false,
+                message : "Please provide OldPassword and NewPassword"
+            })
+        }
+
+        //compare the oldPassword and userPassword
+        const isMatch = await bcrypt.compare(oldPassword, user.password)
+        if(!isMatch){
+            return res.status(500).json({
+                success: false,
+                message : "Invalid old password"
+            })
+        }
+
+        //hashing the password
+        const hashPassword = await bcrypt.hash(newPassword , 10)
+        user.password = hashPassword
+        await user.save()
+
+        res.status(200).json({
+            success : true,
+            message : "Password updated successfully"
+        })
+    } catch (error) {
+        res.status(500).json({
+            succcess: false,
+            message: "Error while updating user password",
+            error: error.message
+        })
+    }
+}
+
 
 
 export const deleteUser = (req, res) => {
