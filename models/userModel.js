@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema({
     profile: {
         type: String,
         default: 'https://t4.ftcdn.net/jpg/01/06/92/47/360_F_106924759_7qPPu6bZNN2O4al1ExdEWBdHUcpKMwuJ.jpg'
+    },
+    answer : {
+        type : String,
+        required : [true ,  "Answer is required"]
     }
 }, { timestamps: true })
 
