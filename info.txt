@@ -3,11 +3,12 @@ USER
 
 REGISTER USER  ==> POST ==> http://localhost:6363/api/user/register
 {
-  "userName" : "a",
+  "userName" : "sf",
   "password" : "123456",
-  "email" : "a@gmail.com",
+  "email" : "sf@gmail.com",
   "address" : ["nanded" , "MH"],
-  "phone" : "7769"
+  "phone" : "7769",
+  "answer" : "teki"
 }
 
 
@@ -21,9 +22,24 @@ LOGIN USER ==> POST  ==> http://localhost:6363/api/user/login
 GET USER ==> GET ==>  http://localhost:6363/api/user/getuser
 
 
-UPDATE USER ==> UPDATE ==> http://localhost:6363/api/user/updateuser
+UPDATE USER ==> PUT ==> http://localhost:6363/api/user/updateuser
 {
 
   "phone" : "777",
   "address" : ["nanded" , "pune"]
+}
+
+
+PASSWORD RESET  ==> POST ==> http://localhost:6363/api/user/reset-password
+{
+  "email" : "sf@gmail.com",
+  "answer" : "teki",
+  "newPassword" : "asdf1234"
+}
+
+
+PASSWORD UPDATE  ==> POST ==>  http://localhost:6363/api/user/update-password
+{
+  "oldPassword" : "asdf1234",
+  "newPassword" : "123456"
 }
