@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 
 export const userRegister = async (req, res) => {
     try {
-        const { userName, email, password, phone, address , answer} = req.body
+        const { userName, email, password, phone, address, answer } = req.body
         if (!userName || !email || !password || !phone || !address || !answer) {
             return res.status(500).json({
                 success: false,
@@ -120,17 +120,17 @@ export const getAUser = async (req, res) => {
 export const getAllUsers = async (req, res) => {
     try {
         const AllUsers = await UserModel.find()
-        if(!AllUsers){
+        if (!AllUsers) {
             return res.status(404).json({
-                succcess : false,
+                succcess: false,
                 message: "Error getting all users"
             })
         }
 
         res.status(200).json({
-            succcess : true,
-            message : "All users are",
-            AllUsers : AllUsers
+            succcess: true,
+            message: "All users are",
+            AllUsers: AllUsers
         })
 
     } catch (error) {
@@ -154,7 +154,7 @@ export const updateUser = async (req, res) => {
             })
         }
 
-        console.log("user" , user);
+        console.log("user", user);
         //updating the three values
         const { userName, address, phone } = req.body
         if (userName) user.userName = userName
@@ -165,7 +165,7 @@ export const updateUser = async (req, res) => {
         res.status(200).json({
             success: true,
             message: 'User saved successfully',
-            user : user
+            user: user
         })
     } catch (error) {
         res.status(500).json({
@@ -180,30 +180,30 @@ export const updateUser = async (req, res) => {
 export const resetPassword = async (req, res) => {
     try {
         // finding user on the basis of email
-        const {email, newPassword , answer} = req.body
-        if(!email || !newPassword || !answer) {
+        const { email, newPassword, answer } = req.body
+        if (!email || !newPassword || !answer) {
             return res.status(500).json({
                 succcess: false,
                 message: "Please provide all fields"
             })
         }
 
-        const user = await UserModel.findOne({email, answer})
-        if(!user){
+        const user = await UserModel.findOne({ email, answer })
+        if (!user) {
             return res.status(500).json({
                 succcess: false,
-                message : "User not found, Invalid answer"
+                message: "User not found, Invalid answer"
             })
         }
 
         //hashing the newPassword
-        const hashPassword = await bcrypt.hash(newPassword , 10)
+        const hashPassword = await bcrypt.hash(newPassword, 10)
         user.password = hashPassword
         await user.save()
 
         res.status(200).json({
-            success : true,
-            message : "Password reset successfully"
+            success: true,
+            message: "Password reset successfully"
         })
     } catch (error) {
         res.status(500).json({
@@ -218,8 +218,8 @@ export const resetPassword = async (req, res) => {
 export const updatePassword = async (req, res) => {
     try {
         //finding user on the basis of id
-        const user = await UserModel.findById({_id : req.body.id})
-        if(!user){
+        const user = await UserModel.findById({ _id: req.body.id })
+        if (!user) {
             return res.status(404).json({
                 success: false,
                 message: "User not found with this id"
@@ -227,31 +227,31 @@ export const updatePassword = async (req, res) => {
         }
 
         //getting the data from the req.body
-        const {oldPassword, newPassword} = req.body
-        if(!oldPassword || !newPassword){
+        const { oldPassword, newPassword } = req.body
+        if (!oldPassword || !newPassword) {
             return res.status(404).json({
                 success: false,
-                message : "Please provide OldPassword and NewPassword"
+                message: "Please provide OldPassword and NewPassword"
             })
         }
 
         //compare the oldPassword and userPassword
         const isMatch = await bcrypt.compare(oldPassword, user.password)
-        if(!isMatch){
+        if (!isMatch) {
             return res.status(500).json({
                 success: false,
-                message : "Invalid old password"
+                message: "Invalid old password"
             })
         }
 
         //hashing the password
-        const hashPassword = await bcrypt.hash(newPassword , 10)
+        const hashPassword = await bcrypt.hash(newPassword, 10)
         user.password = hashPassword
         await user.save()
 
         res.status(200).json({
-            success : true,
-            message : "Password updated successfully"
+            success: true,
+            message: "Password updated successfully"
         })
     } catch (error) {
         res.status(500).json({
@@ -264,10 +264,10 @@ export const updatePassword = async (req, res) => {
 
 
 
-export const deleteUser = async(req, res) => {
+export const deleteUser = async (req, res) => {
     try {
         const deleteUser = await UserModel.findByIdAndDelete(req.params.id)
-        if(!deleteUser){
+        if (!deleteUser) {
             return res.status(404).json({
                 success: false,
                 message: "User with this Id not found"
@@ -276,7 +276,7 @@ export const deleteUser = async(req, res) => {
 
         res.status(200).json({
             success: true,
-            message : "User deleted successfully"
+            message: "User deleted successfully"
         })
 
     } catch (error) {

@@ -17,4 +17,5 @@ userRouter.post('/update-password', isAuthenticated , updatePassword)
 
 userRouter.delete('/delete-user/:id', isAuthenticated , deleteUser)
 
+
 export default userRouter

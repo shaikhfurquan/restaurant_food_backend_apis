@@ -5,9 +5,11 @@ import morgan from 'morgan';
 import connectDB from './db/connectDB.js';
 import userRouter from './routes/userRoute.js';
 
+
 dotenv.config()
 
 const app = express();
+
 
 //express middlewares
 app.use(express.json());
