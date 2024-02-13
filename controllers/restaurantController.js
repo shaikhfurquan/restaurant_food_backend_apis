@@ -61,7 +61,7 @@ export const getRestaurantById = async (req, res) => {
         const restaurantId = req.params.id
         const restaurant = await RestaurantModel.findById(restaurantId)
         if (!restaurant) {
-            return res.status(404).json({
+            return res.status(200).json({
                 success: false,
                 message: "Restaurant not found"
             })
