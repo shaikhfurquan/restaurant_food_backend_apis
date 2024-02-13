@@ -4,6 +4,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import connectDB from './db/connectDB.js';
 import userRouter from './routes/userRoute.js';
+import restaurantRouter from './routes/restaurantRoute.js';
 
 
 dotenv.config()
@@ -19,6 +20,7 @@ app.use(morgan('dev'))
 
 //routes
 app.use('/api/user' , userRouter)
+app.use('/api/restaurant' , restaurantRouter)
 
 //db connection
 connectDB()
