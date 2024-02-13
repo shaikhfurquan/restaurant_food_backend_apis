@@ -125,7 +125,5 @@ UPDATE RESTAURANT BY ID  ==>  PUT  ==>  http://localhost:6363/api/restaurant/upd
 }
 
 
-
-
 DELETE RESTAURANT BY ID ==> DELETE ==> http://localhost:6363/api/restaurant/delete/65cb245d774009802507cfaf
 
