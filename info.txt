@@ -86,3 +86,10 @@ CREATE RESTAURANT  ==> POST  ==>  http://localhost:6363/api/restaurant/create
     "address": "mumbai india"
   }
 }
+
+
+
+GET ALL RESTAURANTS  ==> GET  ==> http://localhost:6363/api/restaurant/get-all
+
+
+GET RESTAURANT BY ID  ==> GET http://localhost:6363/api/restaurant/get/65cb0c21641015bca28a148e
