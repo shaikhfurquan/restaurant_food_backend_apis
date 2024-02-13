@@ -82,6 +82,28 @@ export const getRestaurantById = async (req, res) => {
 }
 
 
+export const updateRestaurantById = async (req, res) => {
+    try {
+        const updateRestaurant = await RestaurantModel.findByIdAndUpdate(req.params.id, req.body, { new: true })
+
+        //if we have id but restaurant doesn't present 
+        if (!updateRestaurant) return res.status(404).json({
+            success: false,
+            message: "Invalid ID..."
+        })
+
+        res.status(200).json({
+            success: true,
+            message: "Restaurant updated successfully...",
+            updateRestaurant : updateRestaurant
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error while updating restaurant",
+        })
+    }
+}
 
 export const deleteRestaurantById = async (req, res) => {
     try {

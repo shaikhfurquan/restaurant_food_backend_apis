@@ -95,5 +95,37 @@ GET ALL RESTAURANTS  ==> GET  ==> http://localhost:6363/api/restaurant/get-all
 GET RESTAURANT BY ID  ==> GET http://localhost:6363/api/restaurant/get/65cb0c21641015bca28a148e
 
 
+UPDATE RESTAURANT BY ID  ==>  PUT  ==>  http://localhost:6363/api/restaurant/update/65cb29e927a8c142d5ac56b9
+{
+  "title": "pizza",
+  "imageUrl": "https://www.zilliondesigns.com/blog/wp-content/uploads/Dominos-Pizza-logo-2.jpg",
+  "foods": [
+    {
+      "dishName": "pizza",
+      "dishPic": "https://www.zilliondesigns.com/blog/wp-content/uploads/Dominos-Pizza-logo-2.jpg",
+      "price": 5
+    }
+  ],
+  "time": "9am to 9pm",
+  "pickup": true,
+  "delivery": true,
+  "isOpen": true,
+  "logoUrl": "https://www.zilliondesigns.com/blog/wp-content/uploads/Dominos-Pizza-logo-2.jpg",
+  "rating": 5,
+  "ratingCount": "5",
+  "code": "1234",
+  "coords": {
+    "id": "123456",
+    "latitude": 1234,
+    "latitudeDelta": 1234,
+    "longitude": 1234,
+    "longitudeDelta": 1234,
+    "address": "mumbai india"
+  }
+}
+
+
+
+
 DELETE RESTAURANT BY ID ==> DELETE ==> http://localhost:6363/api/restaurant/delete/65cb245d774009802507cfaf
 
