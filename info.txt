@@ -93,3 +93,7 @@ GET ALL RESTAURANTS  ==> GET  ==> http://localhost:6363/api/restaurant/get-all
 
 
 GET RESTAURANT BY ID  ==> GET http://localhost:6363/api/restaurant/get/65cb0c21641015bca28a148e
+
+
+DELETE RESTAURANT BY ID ==> DELETE ==> http://localhost:6363/api/restaurant/delete/65cb245d774009802507cfaf
+
