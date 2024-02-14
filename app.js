@@ -6,6 +6,7 @@ import connectDB from './db/connectDB.js';
 import userRouter from './routes/userRoute.js';
 import restaurantRouter from './routes/restaurantRoute.js';
 import categoryRouter from './routes/categoryRoute.js';
+import foodRouter from './routes/foodRoute.js';
 
 
 dotenv.config()
@@ -23,6 +24,7 @@ app.use(morgan('dev'))
 app.use('/api/user' , userRouter)
 app.use('/api/restaurant' , restaurantRouter)
 app.use('/api/category' , categoryRouter)
+app.use('/api/food' , foodRouter)
 
 //db connection
 connectDB()
