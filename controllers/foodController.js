@@ -73,3 +73,36 @@ export const getFoodById = async(req,res)=>{
         })
     }
 }
+
+
+export const getFoodByRestaurantId = async (req, res) => {
+    try {
+        const restaurantId = req.params.id
+        if(!restaurantId){
+            res.status(404).json({
+                success : false,
+                message : "Please provide a restaurant Id"
+            })
+        }
+
+        const food = await FoodModel.find({restaurant : restaurantId})
+        console.log("hello===>" , food);
+        if(!food){
+            return res.status(404).json({
+                success : false,
+                message : "No food found with this Id"
+            })
+        }
+        res.status(200).json({
+            success : true,
+            message : "Food based on restaurant",
+            food : food
+        })
+    } catch (error) {
+        res.status(500).json({
+            success : false,
+            message : "Error while getting food by restaurant",
+            error : error.message
+        })
+    }
+}
