@@ -154,3 +154,20 @@ DELETE CATEGORY  ==> DELETE  ==> http://localhost:6363/api/category/delete/65cc6
 
 
 
+FOOD
+
+CREATE FOOD  ==> POST ===> http://localhost:6363/api/food/create
+{
+  "title" : "burger",
+  "description" : "tasty",
+  "price" : 200,
+  "foodTags" : "chiken",
+  "isAvailabe" : false,
+  "restaurant" : "65cb0c21641015bca28a148e",
+  "rating" : "3"
+}
+
+
+GET ALL FOODS  ==>  GET  ==> http://localhost:6363/api/food/get-all
+
+GET FOOD BY ID  ==>  GET  ==> http://localhost:6363/api/food/get/65ccd95409a39255de3071b1
