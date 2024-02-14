@@ -52,3 +52,38 @@ export const getAllCategory = async (req, res) => {
         })
     }
 }
+
+
+
+export const getCategoryById = async(req, res) =>{
+    try {
+        const category = await CategoryModel.findById(req.params.id);
+        if(!category){
+            return res.status(404).json({
+                success: false,
+                message: "Category not found with this id",
+            })
+        }
+        res.status(200).json({
+            success: true,
+            category : category
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error getting all categories",
+            error: error.message
+        })
+    }
+}
+export const updateCategory = (req, res) =>{
+    try {
+        
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error getting all categories",
+            error: error.message
+        })
+    }
+}
