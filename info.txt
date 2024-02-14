@@ -144,3 +144,12 @@ GET ALL CATEGORIES ==> GET  ==> http://localhost:6363/api/category/get-all
 
 GET CATEGORY BY ID ==> GET  ==> http://localhost:6363/api/category/get/65cc6271dc43de96a78d7532
 
+
+
+UPDATE CATEGORY  ==> PUT  ==> http://localhost:6363/api/category/update/65cc6271dc43de96a78d7532
+
+
+
+
+
+

@@ -76,9 +76,24 @@ export const getCategoryById = async(req, res) =>{
         })
     }
 }
-export const updateCategory = (req, res) =>{
+export const updateCategory = async (req, res) =>{
     try {
-        
+        const {title , imageUrl} = req.body
+
+        const updateCategory = await CategoryModel.findByIdAndUpdate(req.params.id , {title , imageUrl}, {new : true})
+
+        if(!updateCategory){
+            return res.status(404).json({
+                success: false,
+                message: "Category not found with this id",
+            })
+        }
+
+        res.status(200).json({
+            success : true,
+            message : "Category updated successfully",
+            updateCategory: updateCategory
+        })
     } catch (error) {
         res.status(500).json({
             success: false,
