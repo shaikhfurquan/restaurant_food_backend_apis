@@ -150,6 +150,7 @@ UPDATE CATEGORY  ==> PUT  ==> http://localhost:6363/api/category/update/65cc6271
 
 
 
+DELETE CATEGORY  ==> DELETE  ==> http://localhost:6363/api/category/delete/65cc6dc8077bfdeff3861741
 
 
 
