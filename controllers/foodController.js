@@ -79,14 +79,14 @@ export const getFoodByRestaurantId = async (req, res) => {
     try {
         const restaurantId = req.params.id
         if(!restaurantId){
-            res.status(404).json({
+            return res.status(404).json({
                 success : false,
                 message : "Please provide a restaurant Id"
             })
         }
 
         const food = await FoodModel.find({restaurant : restaurantId})
-        console.log("hello===>" , food);
+
         if(!food){
             return res.status(404).json({
                 success : false,
@@ -106,3 +106,67 @@ export const getFoodByRestaurantId = async (req, res) => {
         })
     }
 }
+
+
+export const updateFood = async (req, res) => {
+    try {
+        const foodId = req.params.id
+        if(!foodId){
+            return res.status(404).json({
+                success : false,
+                message : "No food Id was found",
+            })
+        }
+
+        const updatedFood = await FoodModel.findByIdAndUpdate(foodId , req.body , {new : true})
+
+        if(!updateFood){
+            return res.status(404).json({
+                success : false,
+                message : "No food found with this Id"
+            })
+        }
+        res.status(200).json({
+            success : true,
+            message : "Food updated successfully",
+            updateFood : updatedFood
+        })
+    } catch (error) {
+        res.status(500).json({
+            success : false,
+            message : "Error while updating food",
+            error : error.message
+        })
+    }
+}
+
+
+
+export const deleteFood = async (req, res) => {
+    try {
+        const foodId = req.params.id
+        if(!foodId){
+            res.status(404).json({
+                success : false,
+                message : "Please provide a restaurant Id"
+            })
+        }
+
+        const deleteFood = await FoodModel.findByIdAndDelete(foodId)
+    
+        res.status(200).json({
+            success : true,
+            message : "Food deleted successfully",
+
+        })
+    } catch (error) {
+        res.status(500).json({
+            success : false,
+            message : "Error while deleting food",
+            error : error.message
+        })
+    }
+}
+
+
+

@@ -170,6 +170,18 @@ CREATE FOOD  ==> POST ===> http://localhost:6363/api/food/create
 
 GET ALL FOODS  ==>  GET  ==> http://localhost:6363/api/food/get-all
 
+
+
 GET FOOD BY ID  ==>  GET  ==> http://localhost:6363/api/food/get/65ccd95409a39255de3071b1
 
+
+
 GET FOOD BASED ON RESTAURANT  ==>  GET  ==> http://localhost:6363/api/food/get-by-restaurant/65cb0c21641015bca28a148e
+
+
+
+UPDATE FOOD BY ID  ==>  PUT  ==> http://localhost:6363/api/food/update/65ccd95409a39255de3071b1
+
+
+
+DELETE FOOD BY ID ==> DELETE ==> http://localhost:6363/api/food/delete/65cddee5c2dd235bd3d7c5d3
