@@ -185,3 +185,37 @@ UPDATE FOOD BY ID  ==>  PUT  ==> http://localhost:6363/api/food/update/65ccd9540
 
 
 DELETE FOOD BY ID ==> DELETE ==> http://localhost:6363/api/food/delete/65cddee5c2dd235bd3d7c5d3
+
+
+
+Order
+PLACE ORDER  ==> POST  ==> http://localhost:6363/api/order/place-order
+
+{
+  "cart" :[
+      {
+        "_id" : "65ccd95409a39255de3071b1",
+      "title" : "Veg Pizza",
+      "description" : "Yummy",
+      "price" : 200
+        
+      }
+    ]
+}
+Place Order Response:-
+{
+  "success": true,
+  "message": "Order placed successfully",
+  "newOrder": {
+    "foods": [
+      "65ccd95409a39255de3071b1"
+    ],
+    "payment": 200,
+    "buyer": "65c877d1bb5be62e69c7a20f",
+    "status": "preparing",
+    "_id": "65ce621581b5a8f59c5a608f",
+    "createdAt": "2024-02-15T19:12:21.781Z",
+    "updatedAt": "2024-02-15T19:12:21.781Z",
+    "__v": 0
+  }
+}
