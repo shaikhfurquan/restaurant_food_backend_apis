@@ -24,7 +24,7 @@ export const placeOrder = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            message : "Order placed successfully",
+            message: "Order placed successfully",
             newOrder: newOrder
         })
 
@@ -36,3 +36,34 @@ export const placeOrder = async (req, res) => {
         })
     }
 }
+
+
+export const changeOrderStatus = async (req, res) => {
+    try {
+        const orderId = req.params.id
+        const { status } = req.body
+        if(!status){
+            return res.status(500).json({
+                success: false,
+                message: "Please provide status"
+            })
+        }
+
+        const order = await OrderModel.findByIdAndUpdate(orderId, { status }, { new: true })
+        res.status(200).json({
+            success: true,
+            message: "Order status updated successfully",
+            order : order
+        }) 
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error while order status update",
+            error: error.message
+        })
+    }
+}
+
+
+
+

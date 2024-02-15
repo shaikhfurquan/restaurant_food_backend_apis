@@ -11,6 +11,18 @@ REGISTER USER  ==> POST ==> http://localhost:6363/api/user/register
   "answer" : "teki"
 }
 
+OR
+{
+  "userName" : "kp",
+  "password" : "123456",
+  "email" : "kp@gmail.com",
+  "address" : ["nanded" , "MH"],
+  "phone" : "7769",
+  "answer" : "teki",
+  "userType" : "admin"
+}
+
+
 
 LOGIN USER ==> POST  ==> http://localhost:6363/api/user/login
 {
@@ -19,7 +31,9 @@ LOGIN USER ==> POST  ==> http://localhost:6363/api/user/login
 }
 
 
+
 GET USER ==> GET ==>  http://localhost:6363/api/user/getuser
+
 
 GET All USERS ==> GET ==>  http://localhost:6363/api/user/all-users
 
@@ -219,3 +233,29 @@ Place Order Response:-
     "__v": 0
   }
 }
+
+
+
+CHANGE ORDER STATUS ==> POST ==> http://localhost:6363/api/order/order-status/65ce621581b5a8f59c5a608f
+{
+  "status" : "prepare"
+}
+
+Response:-
+{
+  "success": true,
+  "message": "Order status updated successfully",
+  "order": {
+    "_id": "65ce621581b5a8f59c5a608f",
+    "foods": [
+      "65ccd95409a39255de3071b1"
+    ],
+    "payment": 200,
+    "buyer": "65c877d1bb5be62e69c7a20f",
+    "status": "prepare",
+    "createdAt": "2024-02-15T19:12:21.781Z",
+    "updatedAt": "2024-02-15T19:48:46.675Z",
+    "__v": 0
+  }
+}
+
