@@ -7,6 +7,7 @@ import userRouter from './routes/userRoute.js';
 import restaurantRouter from './routes/restaurantRoute.js';
 import categoryRouter from './routes/categoryRoute.js';
 import foodRouter from './routes/foodRoute.js';
+import orderRouter from './routes/orderRoute.js';
 
 
 dotenv.config()
@@ -25,6 +26,7 @@ app.use('/api/user' , userRouter)
 app.use('/api/restaurant' , restaurantRouter)
 app.use('/api/category' , categoryRouter)
 app.use('/api/food' , foodRouter)
+app.use('/api/order' , orderRouter)
 
 //db connection
 connectDB()
