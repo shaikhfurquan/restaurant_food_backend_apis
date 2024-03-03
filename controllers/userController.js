@@ -20,7 +20,7 @@ export const userRegister = async (req, res) => {
                 message: "User already exists, Please Login"
             })
         }
-        //hashing user password
+        //hashing user password(user password from req.body)
         const hashPassword = await bcrypt.hash(password, 10)
 
         //create new user
@@ -59,7 +59,7 @@ export const userLogin = async (req, res) => {
                 message: "User not found, Register first",
             })
         }
-        //compare password
+        //compare password(userPassword & insideDB user.password)
         const isMatch = await bcrypt.compare(password, user.password)
         if (!isMatch) {
             return res.status(404).json({ success: false, message: "Invalid credentials" })
